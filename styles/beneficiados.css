@@ -1,0 +1,48 @@
+.beneficiado-card {
+    width: 95%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    /* height: 200px; */
+    background: linear-gradient(#F53838, blue);
+    color: #d2d1d1;
+    padding: 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    margin: 0px 10px;
+
+    transition: 0.2s;
+}
+.beneficiado-card:hover {
+    text-decoration: none;
+    color: #ffffff;
+}
+.beneficado-intern { 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.img-name-slider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.slider-description {
+    width: 100%;
+    text-align: justify;
+    text-decoration: none;
+}
+
+@media (min-width: 100px) and (max-width: 1000px) {
+    .beneficiado-card {
+        width: 100%;
+        margin: 0px;
+        text-decoration: none;
+    }
+    .slider-description {
+        text-align: center;
+    }
+}

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolidaryPoints | Menu</title>
+    <link rel="stylesheet" href="../styles/general.css">
+    <link rel="stylesheet" href="../styles/header.css">
+    <script defer src="../js/header.js"></script>
+    <link rel="stylesheet" href="../styles/presentation.css">
+    <link rel="stylesheet" href="../styles/benefits.css">
+    <link rel="stylesheet" href="../styles/start.css">
+    <link rel="stylesheet" href="../styles/beneficiados.css">
+    <link rel="stylesheet" href="../styles/footer.css">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin=""/>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script defer src="../node_modules/@splidejs/splide/dist/js/splide.min.js"></script>
+    <link rel="stylesheet" href="../node_modules/@splidejs/splide/dist/css/splide.min.css">
+    <link rel="stylesheet" href="../node_modules/@splidejs/splide/dist/css/themes/splide-sea-green.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+</head>
+<body onload="sliderPerPage()">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap');
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Rubik', sans-serif;
+      font-size: 16px;
+    }
+    .all-container {
+      width: 100%;
+      height: 1000px;
+      margin: auto;
+      position: relative;
+      top: 100px;
+    }
+    .align-div {
+      width: 83%;
+      margin: auto;
+      
+    }
+    #mapid {
+      height: 450px;
+      z-index: 1;
+    }
+
+  </style>
+    <div id="wrapper">
+      <nav>
+        <div class="navbar">
+          <i class='bx bx-menu'></i>
+          <div class="logo"><img src="../images/logo.svg"></div>
+          <div class="nav-links">
+            <div class="sidebar-logo">
+              <span class="logo-name"><img src="../images/logo.svg"></span>
+              <i class='bx bx-x' ></i>
+            </div>
+            <ul class="links">
+              <li>
+                <a style="border-bottom: 1px solid #F53838; " href="index.html">Home</a>
+              </li>
+              <li>
+                <a href="quem-somos.html">Sobre</a>
+              </li>
+              <li>
+                <a href="interesses.php">Pontos</a>
+              </li>
+              <li>
+                <a href="nossos-servicos.html">Perfil</a>
+              </li>
+              
+              <li><a href="contato.php">Feedback</a></li>
+
+              <li><a href="contato.php">Ajuda</a></li>
+
+              <li><a style="display: flex;" href="../../../hda/helpdesk/pages/login.php">Mapa &nbsp;<img width="25px" src="../images/map-icon.svg"></a></li>
+              
+              <li><a href="contato.php"><b>Entre</b></a></li>
+
+              <li><a class="item-cadastro" href="contato.php">Cadastre-se</a></li>
+            </ul>
+          </div>
+          <div class="search-box">
+            <i style="display: none;" class='bx bx-search'></i>
+            <div class="input-box">
+              <input type="text" placeholder="Search...">
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div class="all-container">
+        <!--Apresentação-->
+        <div class="align-div">
+          <div class="presentation-wrapper">
+            <div class="presentation-description-container">
+              <h2 class="title presentation">Nosso foco é implementar a solidariedade</h2>
+              <p class="description presentation">
+                Trabalhando juntos, podemos melhorar muito a convivência nas cidades, por meio do desenvolvimento da empatia e o espírito solidário na população
+              </p>
+              <a href="#" class="button-form-presentation">Saiba Como</a>
+            </div>
+            <div class="img-container-presentation">
+              <img src="../images/presentation-img.svg" alt="Apresentação">
+            </div>
+          </div>
+        </div>
+
+          <!--Benefícios-->
+          <div class="align-div">
+            <div class="benefits-wrapper">
+              <div class="benefits-description-container">
+                <h2 class="subtitle benefits">Quais benefícios planejamos entregar?</h2>
+                <p class="description benefits">
+                  Com o uso do sistema, podemos fazer o uso da tecnologia para mapear necessidades na cidade.
+                </p>
+              
+                <p style="display: flex; align-items: center;" class="benefits-item-list"><img src="../images/checkmark.svg" alt="Checkmark">&nbsp;&nbsp; Mapeamento de necessidades</p>
+                <p style="display: flex; align-items: center;" class="benefits-item-list"><img src="../images/checkmark.svg" alt="Checkmark">&nbsp;&nbsp;Transformar a ajuda em um processo dinâmico e simples</p>
+                <p style="display: flex; align-items: center;" class="benefits-item-list"><img src="../images/checkmark.svg" alt="Checkmark">&nbsp;&nbsp;Desenvolver o espírito de ajuda nas pessoas</p>
+                <p style="display: flex; align-items: center;" class="benefits-item-list"><img src="../images/checkmark.svg" alt="Checkmark">&nbsp;&nbsp;Melhorar a convivência da cidade</p>
+              </div>
+              <div class="img-container-benefits">
+                <img src="../images/benefits-img.svg" alt="Benefícios">
+              </div>
+            </div>
+          </div>
+
+           <!--Comece por aqui-->
+          <div class="start-wrapper">
+            <div class="align-div">
+              <div class="start-description-container">
+                <h2 class="subtitle start">Comece Por Aqui</h2>
+                <p style="margin-top: -20px" class="description start">
+                  Não seja tímido, ajude ou nos deixe-te ajudar!
+                </p>
+              </div>
+              <div class="start-cards-container">
+                <div class="start-card">
+                  <img src="../images/card.png" alt="Card">
+                  <div class="start-conditions">
+                    <h3 class="point-title">Ponto de Necessidade</h3>
+                    <p style="display: flex; align-items: center;" class="start-item-list"><img src="../images/checkmark.svg" alt="Checkmark">&nbsp;&nbsp; Teste 1 lorem</p>
+                    <p style="display: flex; align-items: center;" class="start-item-list"><img src="../images/checkmark.svg" alt="Checkmark">&nbsp;&nbsp; Teste 2 lorem ipslum</p>
+                    <p style="display: flex; align-items: center;" class="start-item-list"><img src="../images/checkmark.svg" alt="Checkmark">&nbsp;&nbsp; Teste 3 ipslum</p>
+                    <p style="display: flex; align-items: center;" class="start-item-list"><img src="../images/checkmark.svg" alt="Checkmark">&nbsp;&nbsp; Último Teste</p>
+                  </div>
+                  <a class="start-card-button" href="#">Selecionar</a>
+                </div>
+
+                <div class="start-card">
+                  <img src="../images/card.png" alt="Card">
+                  <div class="start-conditions">
+                    <h3 class="point-title">Ponto de Necessidade</h3>
+                    <p style="display: flex; align-items: center;" class="start-item-list"><img src="../images/checkmark.svg" alt="Checkmark">&nbsp;&nbsp; Teste 1 lorem</p>
+                    <p style="display: flex; align-items: center;" class="start-item-list"><img src="../images/checkmark.svg" alt="Checkmark">&nbsp;&nbsp; Teste 2 lorem ipslum</p>
+                    <p style="display: flex; align-items: center;" class="start-item-list"><img src="../images/checkmark.svg" alt="Checkmark">&nbsp;&nbsp; Teste 3 ipslum</p>
+                    <p style="display: flex; align-items: center;" class="start-item-list"><img src="../images/checkmark.svg" alt="Checkmark">&nbsp;&nbsp; Último Teste</p>
+                  </div>
+                  <a class="start-card-button" href="#">Selecionar</a>
+                </div>
+
+                <div class="start-card">
+                  <img src="../images/card.png" alt="Card">
+                  <div class="start-conditions">
+                    <h3 class="point-title">Ponto de Necessidade</h3>
+                    <p style="display: flex; align-items: center;" class="start-item-list"><img src="../images/checkmark.svg" alt="Checkmark">&nbsp;&nbsp; Teste 1 lorem</p>
+                    <p style="display: flex; align-items: center;" class="start-item-list"><img src="../images/checkmark.svg" alt="Checkmark">&nbsp;&nbsp; Teste 2 lorem ipslum</p>
+                    <p style="display: flex; align-items: center;" class="start-item-list"><img src="../images/checkmark.svg" alt="Checkmark">&nbsp;&nbsp; Teste 3 ipslum</p>
+                    <p style="display: flex; align-items: center;" class="start-item-list"><img src="../images/checkmark.svg" alt="Checkmark">&nbsp;&nbsp; Último Teste</p>
+                  </div>
+                  <a class="start-card-button" href="#">Selecionar</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="start-wrapper">
+            <div class="align-div">
+              <div class="start-description-container">
+                <h2 class="subtitle start">Pontos abertos nesse momento</h2>
+                <p style="margin-top: -20px" class="description start">
+                  Acompanhe o nosso mapa e veja a solidariedade agir na sua cidade
+                </p>
+              </div>
+              <br>
+              <div id="mapid"></div>
+            </div>
+          </div>
+
+          
+          <div style="background: white!important;" class="start-wrapper">
+            <div class="align-div">
+              <div class="start-description-container">
+                <h2 class="subtitle start">Relatos de Beneficiados</h2>
+                <p style="margin-top: -20px" class="description start">
+                  Essas pessoas foram impactadas pela solidáriedade por meio do programa SolidaryPoints, veja alguns deles.
+                </p>
+              </div>
+            
+              <div id="card-slider" class="splide">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                      <li class="splide__slide">
+                        <a class="beneficiado-card" href="nossos-servicos.html#implantacao">
+                          <div class="beneficiado-intern">
+                            <div class="img-name-slider">
+                              <img src="../images/person-icon.svg">
+                              <h4 class="slider-title">Viezh Robert</h4>
+                            </div>
+                            
+                            <div class="slider-description">
+                              “Wow... I am very happy to use this VPN, it turned out to be more than my expectations and so far there have been no problems. LaslesVPN always the best”.
+                            </div>
+                          </div>
+                        </a>
+                      </li>
+
+                    <li class="splide__slide">
+                      <a class="beneficiado-card" href="nossos-servicos.html#implantacao">
+                        <div class="beneficiado-intern">
+                          <div class="img-name-slider">
+                            <img src="../images/person-icon.svg">
+                            <h4 class="slider-title">Viezh Robert</h4>
+                          </div>
+                          
+                          <div class="slider-description">
+                            “Wow... I am very happy to use this VPN, it turned out to be more than my expectations and so far there have been no problems. LaslesVPN always the best”.
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+
+                    <li class="splide__slide">
+                      <a class="beneficiado-card" href="nossos-servicos.html#implantacao">
+                        <div class="beneficiado-intern">
+                          <div class="img-name-slider">
+                            <img src="../images/person-icon.svg">
+                            <h4 class="slider-title">Viezh Robert</h4>
+                          </div>
+                          
+                          <div class="slider-description">
+                            “Wow... I am very happy to use this VPN, it turned out to be more than my expectations and so far there have been no problems. LaslesVPN always the best”.
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+
+                    <li class="splide__slide">
+                      <a class="beneficiado-card" href="nossos-servicos.html#implantacao">
+                        <div class="beneficiado-intern">
+                          <div class="img-name-slider">
+                            <img src="../images/person-icon.svg">
+                            <h4 class="slider-title">Viezh Robert</h4>
+                          </div>
+                          
+                          <div class="slider-description">
+                            “Wow... I am very happy to use this VPN, it turned out to be more than my expectations and so far there have been no problems. LaslesVPN always the best”.
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="footer-basic">
+            <footer>
+                <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
+                <ul class="list-inline">
+                    <li class="list-inline-item"><a href="#">Home</a></li>
+                    <li class="list-inline-item"><a href="#">Sobre</a></li>
+                    <li class="list-inline-item"><a href="#">Feedback</a></li>
+                    <li class="list-inline-item"><a href="#">Ajuda</a></li>
+                </ul>
+                <p class="copyright">SolidaryPoints © 2021</p>
+            </footer>
+        </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+      </div>
+    </div>
+
+    <script>
+      
+      let perPageValue = 0;
+      let screenWidth = screen.width;
+
+      
+      if(screenWidth > 1000) {
+        document.addEventListener( 'DOMContentLoaded', function () {
+            new Splide( '#card-slider', {
+                perPage  : 3,
+                //trimSpace: false,
+                width: '90vw',
+                rewind: true,
+                breakpoints: {
+                    1900: {
+                        perPage: 3,
+                    }
+                },
+            } ).mount();
+        } );
+      }
+      else {
+        document.addEventListener( 'DOMContentLoaded', function () {
+            new Splide( '#card-slider', {
+                perPage  : 1,
+                //trimSpace: false,
+                width: '100vw',
+                rewind: true,
+                breakpoints: {
+                    1900: {
+                        perPage: 1,
+                    }
+                },
+            } ).mount();
+        } );
+      }
+   </script>
+
+    <script>
+        var map = L.map('mapid').setView([-4.129254, -38.239766], 13.5);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        }).addTo(map);
+
+        function onMapClick(e) {
+            alert("You clicked the map at " + e.latlng);
+        }
+        map.on('click', onMapClick);
+    </script>
+</body>
+</html>

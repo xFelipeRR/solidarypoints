@@ -1,0 +1,24 @@
+@media (max-width: 1000px) {
+    .benefits-wrapper {
+        flex-direction: column!important;
+    }
+    .img-container-benefits img {
+        width: 80%;
+    }
+}
+.benefits-wrapper {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
+}
+.benefits-description-container {
+    flex: 2;
+}
+.img-container-benefits {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 2;
+}
