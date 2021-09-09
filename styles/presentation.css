@@ -47,4 +47,7 @@
     .presentation-description-container {
         align-items: center;
     }
+    .img-container-presentation img {
+        margin-top: 20px;
+    }
 }
