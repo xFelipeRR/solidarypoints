@@ -1,0 +1,32 @@
+.card-points-container {
+  margin-top: 50px;
+}
+.card-points-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.card-points-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    border: 2px solid #DDDDDD;
+    width: 280px;
+    height: 250px;
+    margin: 10px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+.card-points-card img {
+    width: 140px;
+}
+.card-points-card:hover {
+  border: 2px solid #F53838;
+}
+.card-point-name {
+  font-weight: 500;
+}

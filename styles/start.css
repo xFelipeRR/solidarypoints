@@ -59,6 +59,7 @@
 .start-card-button:hover {
     background: #F53838;
     color: whitesmoke;
+    text-decoration: none;
 }
 @media (min-width: 100px) and (max-width: 1000px) {
     .start-cards-container {
