@@ -41,6 +41,94 @@
       height: 250px;
       z-index: 1;
     }
+    .radios {
+      display: flex;
+      width: 40%;
+      flex-wrap: wrap;
+    }
+    .radios label{
+        display: table;
+        margin-left: 30px;
+        width: 100px;
+
+        font-size: 15px;
+    }
+
+    .radios {
+			display: flex;
+			flex-direction: column;
+      margin-left: 50px;
+      flex: 1.8;
+    }
+      label {
+          font-size: 27px;
+      }
+      .radio {
+          margin-right: 50px;
+      }
+      /* The container */
+      .container {
+          /*display: block;*/
+          position: relative;
+          padding-left: 44px;
+          padding-bottom: 15px;
+          cursor: pointer;
+          font-size: 30px;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+      }
+
+      /* Hide the browser's default radio button */
+      .container input {
+          position: absolute;
+          opacity: 0;
+          cursor: pointer;
+      }
+
+      /* Create a custom radio button */
+      .checkmark {
+          position: absolute;
+          top: 0;
+          left: 0px;
+          height: 37px;
+          width: 37px;
+          background-color: #eee;
+          border-radius: 50%;
+      }
+
+      /* On mouse-over, add a grey background color */
+      .container:hover input ~ .checkmark {
+          background-color: #ccc;
+      }
+
+      /* When the radio button is checked, add a blue background */
+      .container input:checked ~ .checkmark {
+          background-color: #d6231d;
+      }
+
+      /* Create the indicator (the dot/circle - hidden when not checked) */
+      .checkmark:after {
+          content: "";
+          position: absolute;
+          display: none;
+      }
+
+      /* Show the indicator (dot/circle) when checked */
+      .container input:checked ~ .checkmark:after {
+          display: block;
+      }
+
+      /* Style the indicator (dot/circle) */
+      .container .checkmark:after {
+          top: 9px;
+          left: 9px;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          background: white;
+      }
 </style>
 
   <div id="wrapper">
@@ -92,17 +180,25 @@
 
       <div class="align-div">
         <div class="cards-description-container">
-          <h2 style="display: flex; align-items: center; margin-bottom: 5px;" style="margin-bottom: 0px!important;" class="title cards">Ponto de Necessidade<img src="../images/yellow-adress-point.svg" alt="Marcação de ponto"></h2>
-          <p class="description cards">
+          <h2 style="display: flex; align-items: center; margin-bottom: 5px;" style="margin-bottom: 0px!important;" class="title cards">Ponto de Doação<img src="../images/yellow-adress-point.svg" alt="Marcação de ponto"></h2>
+          <p style="padding: 5px;" class="description cards">
             Precisaremos de algumas informações para criar o seu ponto
           </p>
           <div class="question-point">
-            <p class="ask-point">O que você precisa?</p>
-            <select placeholder="Escolha sua necessidade" name="need" id="need">
-              <option value="" disabled selected>Escolha sua necessidade</option>
-              <option value="r">Roupas</option>
-              <option value="c">Comidas</option>
-            </select>
+            <p class="ask-point">O que você doará?</p>
+            <!--CHECKBOXES-->
+            <label class='container'>
+              <input type='checkbox' id='1' class='checkbox' name='cDoacoes[]' value='1'><i></i>Arroz
+              <span class='checkmark'>
+            </label>
+            <label class='container'>
+              <input type='checkbox' id='1' class='checkbox' name='cDoacoes[]' value='1'><i></i>Feijão
+              <span class='checkmark'>
+            </label>
+            <label class='container'>
+              <input type='checkbox' id='1' class='checkbox' name='cDoacoes[]' value='1'><i></i>Macarrão
+              <span class='checkmark'>
+            </label>
           </div>
         </div>
       </div>
