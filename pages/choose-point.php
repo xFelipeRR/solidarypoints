@@ -1,3 +1,10 @@
+<?php 
+
+echo $_POST["point"];
+
+$conn = mysqli_connect("localhost","root","", "testes");
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,6 +44,9 @@
         position: relative;
         top: 100px;
     }
+    .title {
+      margin-top: -20px;
+    }
     #mapid {
       height: 250px;
       z-index: 1;
@@ -71,9 +81,8 @@
           /*display: block;*/
           position: relative;
           padding-left: 44px;
-          padding-bottom: 15px;
           cursor: pointer;
-          font-size: 30px;
+          font-size: 15px;
           -webkit-user-select: none;
           -moz-user-select: none;
           -ms-user-select: none;
@@ -91,9 +100,9 @@
       .checkmark {
           position: absolute;
           top: 0;
-          left: 0px;
-          height: 37px;
-          width: 37px;
+          left: 20px;
+          height: 17px;
+          width: 17px;
           background-color: #eee;
           border-radius: 50%;
       }
@@ -122,10 +131,10 @@
 
       /* Style the indicator (dot/circle) */
       .container .checkmark:after {
-          top: 9px;
-          left: 9px;
-          width: 20px;
-          height: 20px;
+          top: 5px;
+          left: 4.2px;
+          width: 8px;
+          height: 8px;
           border-radius: 50%;
           background: white;
       }
@@ -185,18 +194,18 @@
             Precisaremos de algumas informações para criar o seu ponto
           </p>
           <div class="question-point">
-            <p class="ask-point">O que você doará?</p>
+            <p class="ask-point">Qual tipo de doação você fará?</p>
             <!--CHECKBOXES-->
             <label class='container'>
-              <input type='checkbox' id='1' class='checkbox' name='cDoacoes[]' value='1'><i></i>Arroz
+              <input type='checkbox' id='1' class='checkbox' name='cDoacoes[]' value='1'><i></i>Roupas
               <span class='checkmark'>
             </label>
             <label class='container'>
-              <input type='checkbox' id='1' class='checkbox' name='cDoacoes[]' value='1'><i></i>Feijão
+              <input type='checkbox' id='1' class='checkbox' name='cDoacoes[]' value='1'><i></i>Comida
               <span class='checkmark'>
             </label>
             <label class='container'>
-              <input type='checkbox' id='1' class='checkbox' name='cDoacoes[]' value='1'><i></i>Macarrão
+              <input type='checkbox' id='1' class='checkbox' name='cDoacoes[]' value='1'><i></i>Higiene
               <span class='checkmark'>
             </label>
           </div>
