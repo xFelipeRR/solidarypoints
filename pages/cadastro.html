@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/cadastro.css">
+    <title>Login | SolidaryPoints</title>
+</head>
+<body>
+    <div class="blur"></div>
+    <div class="ball1"></div>
+    <div class="ball2"></div>
+	<div class="wrapper">
+		<header class="title_login">
+			<h1 class="header_title">
+				Vamos fazer o seu cadastro
+			</h1>
+			<h2 class="header_subtitle">
+				Bem vindo(a) a nossa plataforma!
+			</h2>
+		</header>
+		<form action='lib/ope.php' method='post' target='_parent' autocomplete='off' class="inputs_form">
+			<main class="inputs">
+					<input id='first-name' class='input100' type='text' name='username' placeholder='Nome completo'>
+        <div class="row1">
+					<input id='contato' class='input100' type='text' name='contato' placeholder='Número de contato'>
+					<input class='input100' type='text' name='cpf' placeholder='CPF'>
+        </div>
+        <br>
+					<input id='first-name' class='input100' type='email' name='email' placeholder='Email'>
+					<input class='input100' type='password' name='pass' placeholder='Digite a Senha'>
+			</main>
+			<footer class="footer_login">
+				<button type="submit" class="login_button">
+					Login
+				</button>
+			</footer>
+		</form>
+		 <img style="position: absolute; top: 0px; right: 15px; margin-top:30px;"width="100px" src="../images/logo.svg" alt="Logo da Atendti">
+	</div>
+    <img src="../images/big-logo.png" alt="Equipe Trabalhando" class='bg-equipe'>
+</body>
+</html>
+

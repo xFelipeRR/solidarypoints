@@ -1,6 +1,7 @@
 @media (max-width: 1000px) {
     .benefits-wrapper {
         flex-direction: column!important;
+        margin-top: 250px;
     }
     .img-container-benefits img {
         width: 80%;
