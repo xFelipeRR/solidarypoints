@@ -9,7 +9,7 @@
     font-family: 'Montserrat', sans-serif;
     text-decoration: none;
     color: white;
-    overflow: hidden;
+    /*overflow: hidden;*/
 
     z-index: 100;
 }
@@ -20,7 +20,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 100vh;
+    /*height: 100vh;*/
 }
 .bg-equipe {
     position: absolute;
@@ -71,12 +71,14 @@ input {
     flex-direction: column;
 	
 	margin-top: 30px;
+    cursor: pointer;
 }
 .input100 {
 	margin: 10px 0px;
 }
 .footer_login a {
     font-weight: 700;
+    cursor: pointer;
 }
 .register {
     color: white;
@@ -92,6 +94,7 @@ input {
     font-size: 1.3rem;
     font-weight: 700;
     border-radius: 10px;
+    cursor: pointer;
 	
 	transition: 0.3s;
 }
