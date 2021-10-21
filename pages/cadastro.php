@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/cadastro.css">
-    <title>Login | SolidaryPoints</title>
+    <title>Cadastro | SolidaryPoints</title>
 </head>
 <body>
     <div class="blur"></div>
@@ -20,7 +20,8 @@
 				Bem vindo(a) a nossa plataforma!
 			</h2>
 		</header>
-		<form action='lib/ope.php' method='post' target='_parent' autocomplete='off' class="inputs_form">
+		<form action='../script.php' method='post' target='_parent' autocomplete='off' class="inputs_form">
+			<input type="hidden" name="visao" value="cadastro">
 			<main class="inputs">
 					<input id='first-name' class='input100' type='text' name='username' placeholder='Nome completo'>
         <div class="row1">
@@ -28,7 +29,7 @@
 					<input class='input100' type='text' name='cpf' placeholder='CPF'>
         </div>
         <br>
-					<input id='first-name' class='input100' type='email' name='email' placeholder='Email'>
+					<input id='email' class='input100' type='email' name='email' placeholder='Email'>
 					<input class='input100' type='password' name='pass' placeholder='Digite a Senha'>
 			</main>
 			<footer class="footer_login">

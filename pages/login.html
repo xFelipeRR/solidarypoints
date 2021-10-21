@@ -20,9 +20,10 @@
 				Bem vindo(a) de volta!
 			</h2>
 		</header>
-		<form action='lib/ope.php' method='post' target='_parent' autocomplete='off' class="inputs_form">
+		<form action='../script.php' method='post' target='_parent' autocomplete='off' class="inputs_form">
+			<input type="hidden" name="visao" value="login">
 			<main class="inputs">
-					<input id='first-name' class='input100' type='text' name='username' placeholder='Nome de Usuário '>
+					<input id='first-name' class='input100' type='email' name='email' placeholder='Email '>
 					<input class='input100' type='password' name='pass' placeholder='Digite a Senha'>
 			</main>
 			<footer class="footer_login">

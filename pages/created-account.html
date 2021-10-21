@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conta Criada! | SolidaryPoints</title>
+</head>
+<body>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap');
+    * {
+      box-sizing: border-box;
+      padding: 0px;
+      margin: 0px;
+    }
+    .wrapper {
+      width: 100%;
+    }
+    .success-title {
+      width: 80%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+      position: relative;
+      top: 60px;
+
+      margin: auto;
+    }
+    .success-msg {
+      font-family: 'Rubik',sans-serif;
+      font-weight: 600;
+      font-size: 30px;
+      text-align: center;
+    }
+    .success-description {
+      margin-top: 10px;
+      font-family: 'Rubik',sans-serif;
+      font-weight: 400;
+      font-size: 24px;
+      text-align: center;
+    }
+    .success-title img {
+      width: 250px;
+      margin-top: 10px;
+    }
+    
+    .login-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center; 
+      width: 50%; 
+      border-radius: 5px;
+      padding: 8px;
+      margin-top: 30px;
+
+      background: #df2525;
+      text-decoration: none;
+      color: #FFFFFF;
+      font-family: 'Rubik', sans-serif;
+      font-weight: 500;
+      border: none;
+
+      transition: 0.4s;
+      cursor: pointer;
+    }
+    .login-btn:hover {
+      background: #aa0808;
+      box-shadow: 0px 10px 22px 1px rgba(245,56,56,0.81);
+      text-decoration: none;
+      color: #FFFFFF;
+    }
+    @media (max-width: 450px) {
+      .success-msg {
+        font-size: 22px;
+      }
+      .success-description {
+        font-size: 16px;
+      }
+    }
+  </style>
+  <div class="wrapper">
+    <img style="margin: 15px; " src="../images/logo.svg" alt="Logo">
+    <header class="success-title">
+      <h1 class="success-msg title">Sua conta foi criada com sucesso!</h1>
+      <p class="success-description">Obrigado por entrar no nosso time, com sua ajuda, poderemos espalhar a solidariedade local</p>
+      <img src="../images/teamwork.png" alt="Conta criada com sucesso">
+      
+      <a class="login-btn" href="login.html">Fazer Login</a>
+    </header>
+  </div>
+</body>
+</html>
