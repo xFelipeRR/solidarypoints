@@ -39,7 +39,7 @@ body {
 .header_subtitle {
     color: white;
     font-size: 2rem;
-    margin-top: 2rem;
+    margin-top: 0.5rem;
     font-weight: 400;
 }
 .inputs {
@@ -56,6 +56,12 @@ input {
     padding: 1rem;
     font-size: .8rem;
     color: black;
+    
+    transition: 0.1s;
+    outline: none;
+}
+input:focus {
+    border: 2px solid rgba(172, 172, 172, 0.74);
 }
 #password {
     margin: 2rem 0rem 1rem 0rem;

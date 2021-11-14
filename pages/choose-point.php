@@ -1,8 +1,32 @@
 <?php 
+session_start();
+if(isset($_SESSION['ID_USUARIO'])) {
+  $cHtml = "<li><a>Olá ".$_SESSION['NOME']."</a></li>";
+}
+else {
+  $cHtml = '<li><a href="contato.php"><b>Entre</b></a></li> <li><a class="item-cadastro" href="contato.php">Cadastre-se</a></li>';
+}
 
-echo $_POST["point"];
+$tp_ponto = $_POST["tp_ponto"];
 
-$conn = mysqli_connect("localhost","root","", "testes");
+if($tp_ponto == 'DO') {
+  $pontoN = 'Doação';
+  $pontoImg = '../images/green-adress-point.png';
+  $descHidden = "hidden";
+  $iconColor = "greenIcon";
+}
+elseif($tp_ponto == 'DI') {
+  $pontoN = 'Distribuição';
+  $pontoImg = '../images/yellow-adress-point.png';
+  $descHidden = "required";
+  $iconColor = "yellowIcon";
+}
+elseif($tp_ponto == 'CO') {
+  $pontoN = 'Coleta';
+  $pontoImg = '../images/blue-adress-point.png';
+  $descHidden = "required";
+  $iconColor = "blueIcon";
+}
 
 ?>
 <!DOCTYPE html>
@@ -12,6 +36,7 @@ $conn = mysqli_connect("localhost","root","", "testes");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pontos | SolidaryPoints</title>
+    <link rel="shortcut icon" href="../images/big-logo.png" />
     <link rel="stylesheet" href="../styles/general.css">
     <link rel="stylesheet" href="../styles/header.css">
     <script defer src="../js/header.js"></script>
@@ -138,6 +163,21 @@ $conn = mysqli_connect("localhost","root","", "testes");
           border-radius: 50%;
           background: white;
       }
+      .point-info-wrapper {
+        display: flex;
+        flex-direction: column;
+      }
+      .point-info-container {
+        margin: 5px;
+      }
+      .point-info {
+        background: #fbfbfb;
+        border: 1px solid #b3b3b3;
+        border-radius: 5px;
+        width: 100%;
+        padding: 5px;
+        outline: none;
+      }
 </style>
 
   <div id="wrapper">
@@ -154,27 +194,25 @@ $conn = mysqli_connect("localhost","root","", "testes");
                   </div>
                   <ul class="links">
                   <li>
-                      <a href="index.html">Home</a>
+                      <a href="index.php">Home</a>
                   </li>
                   <li>
-                      <a href="quem-somos.html">Sobre</a>
+                      <a href="quem-somos.php">Sobre</a>
                   </li>
                   <li>
                       <a style="border-bottom: 1px solid #F53838; " href="pontos.html">Pontos</a>
                   </li>
                   <li>
-                      <a href="nossos-servicos.html">Perfil</a>
+                      <a href="meu_perfil.php">Perfil</a>
                   </li>
                   
-                  <li><a href="contato.php">Feedback</a></li>
+                  <li><a href="feedback.php">Feedback</a></li>
 
-                  <li><a href="contato.php">Ajuda</a></li>
+                  <li><a href="help.php">Ajuda</a></li>
 
-                  <li><a style="display: flex;" href="../../../hda/helpdesk/pages/login.php">Mapa &nbsp;<img width="25px" src="../images/map-icon.svg"></a></li>
+                  <li><a style="display: flex;" href="full-map.php">Mapa &nbsp;<img width="25px" src="../images/map-icon.svg"></a></li>
                   
-                  <li><a href="contato.php"><b>Entre</b></a></li>
-
-                  <li><a class="item-cadastro" href="contato.php">Cadastre-se</a></li>
+                  <?php echo $cHtml; ?>
                   </ul>
               </div>
               <div class="search-box">
@@ -186,42 +224,59 @@ $conn = mysqli_connect("localhost","root","", "testes");
           </div>
         </nav>
       </div>
-
-      <div class="align-div">
-        <div class="cards-description-container">
-          <h2 style="display: flex; align-items: center; margin-bottom: 5px;" style="margin-bottom: 0px!important;" class="title cards">Ponto de Doação<img src="../images/yellow-adress-point.svg" alt="Marcação de ponto"></h2>
-          <p style="padding: 5px;" class="description cards">
-            Precisaremos de algumas informações para criar o seu ponto
-          </p>
-          <div class="question-point">
-            <p class="ask-point">Qual tipo de doação você fará?</p>
-            <!--CHECKBOXES-->
-            <label class='container'>
-              <input type='checkbox' id='1' class='checkbox' name='cDoacoes[]' value='1'><i></i>Roupas
-              <span class='checkmark'>
-            </label>
-            <label class='container'>
-              <input type='checkbox' id='1' class='checkbox' name='cDoacoes[]' value='1'><i></i>Comida
-              <span class='checkmark'>
-            </label>
-            <label class='container'>
-              <input type='checkbox' id='1' class='checkbox' name='cDoacoes[]' value='1'><i></i>Higiene
-              <span class='checkmark'>
-            </label>
+      <form action="../script.php" method="POST">
+        <input type="hidden" id="visao" name="visao" value="open_point">  
+        <input type="hidden" id="tipo_ponto" name="tipo_ponto" value="<?php echo $tp_ponto; ?>">  
+        <input type="hidden" id="lat" name="lat" value="">  
+        <input type="hidden" id="lng" name="lng" value="">
+        <div class="align-div">
+          <div class="cards-description-container">
+            <h2 style="display: flex; align-items: center; margin-bottom: 5px;" style="margin-bottom: 0px!important;" class="title cards">Ponto de <?php echo $pontoN; ?><img src="<?php echo $pontoImg; ?>" alt="Marcação de ponto"></h2>
+            <p style="padding: 5px;" class="description cards">
+              Precisaremos de algumas informações para criar o seu ponto
+            </p>
+            <div class="point-info-wrapper">
+              <div class="point-info-container">
+                <label style="font-size: 20px;" for="desc" <?php echo $descHidden; ?>>Descrição do Ponto: </label>
+                <input class="point-info" type="text" name="desc" id="desc" <?php echo $descHidden; ?>>
+              </div>
+              <div class="point-info-container">
+                <label style="font-size: 20px;" for="ref">Referência do Ponto: </label>
+                <input class="point-info" type="text" name="ref" id="ref">
+              </div>
+            </div>
+            <?php if($tp_ponto == 'DO') { ?>
+            <div class="question-point">
+              <p class="ask-point">Qual o que o ponto oferecerá?</p>
+              <!--CHECKBOXES-->
+              <label class='container'>
+                <input type='checkbox' id='1' class='checkbox' name='cDoacoes[]' value='R'><i></i>Roupas
+                <span class='checkmark'>
+              </label>
+              <label class='container'>
+                <input type='checkbox' id='2' class='checkbox' name='cDoacoes[]' value='C'><i></i>Comida
+                <span class='checkmark'>
+              </label>
+              <label class='container'>
+                <input type='checkbox' id='3' class='checkbox' name='cDoacoes[]' value='H'><i></i>Higiene
+                <span class='checkmark'>
+              </label>
+            </div>
+            <?php } ?>
           </div>
         </div>
-      </div>
 
-      <div class="align-div">
-        <div style="margin-top: 20px;" class="cards-description-container">
-          <h2 style="font-size: 25px; display: flex; align-items: center; margin-bottom: 0px; margin-top: -10px;" style="margin-bottom: 0px!important;" class="title cards">Escolha o Local</h2>
-          <p style="font-size: 15px; margin-bottom: 5px;" class="description cards">
-            Clique em cima do local que você quer cadastrar o ponto
-          </p>
-          <div id="mapid"></div>
-          <button class="insert-point-btn">Inserir</button>
+        <div class="align-div">
+          <div style="margin-top: 20px;" class="cards-description-container">
+            <h2 style="font-size: 25px; display: flex; align-items: center; margin-bottom: 0px; margin-top: -10px;" style="margin-bottom: 0px!important;" class="title cards">Escolha o Local</h2>
+            <p style="font-size: 15px; margin-bottom: 5px;" class="description cards">
+              Clique em cima do local que você quer cadastrar o ponto
+            </p>
+            <div id="mapid"></div>
+            <button class="insert-point-btn">Inserir</button>
+          </div>
         </div>
-      </div>
+    </form>
 
     </div>
   </div>
@@ -233,9 +288,45 @@ $conn = mysqli_connect("localhost","root","", "testes");
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     }).addTo(map);
 
+    var greenIcon = L.icon({
+      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+
+
+      shadowSize:   [50, 64], // size of the shadow
+      iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+      shadowAnchor: [4, 62],  // the same for the shadow
+      popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+    });
+    var yellowIcon = L.icon({
+          iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-yellow.png',
+          shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+
+
+          shadowSize:   [50, 64], // size of the shadow
+          iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+          shadowAnchor: [4, 62],  // the same for the shadow
+          popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+    });
+    var blueIcon = L.icon({
+          iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+          shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+
+
+          shadowSize:   [50, 64], // size of the shadow
+          iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+          shadowAnchor: [4, 62],  // the same for the shadow
+          popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+    });
+
     function onMapClick(e) {
-        alert("You clicked the map at " + e.latlng);
+      document.querySelector('#lat').value = e.latlng.lat;
+      document.querySelector('#lng').value = e.latlng.lng;
+
+      alert("Localização Escolhida!");
+      //L.marker([latlng], {icon: <?php echo $iconColor; ?>}).addTo(map)
     }
+
     map.on('click', onMapClick);
 </script>
 </body>

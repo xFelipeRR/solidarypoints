@@ -1,3 +1,12 @@
+<?php
+	session_start();
+	if(isset($_SESSION["ADMIN"]) && $_SESSION["ADMIN"] == 'S') {
+		$hidden = "";
+	}
+	else {
+		$hidden = "hidden";
+	}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -6,8 +15,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/cadastro.css">
     <title>Cadastro | SolidaryPoints</title>
+		<link rel="shortcut icon" href="../images/big-logo.png" />
 </head>
 <body>
+		<style>
+			select {
+				margin-top: 10px;
+				color: black;
+				width: 50%;
+				padding: 8px;
+			}
+			select option {
+				color: black;
+				padding: 5px;
+			}
+		</style>
     <div class="blur"></div>
     <div class="ball1"></div>
     <div class="ball2"></div>
@@ -25,12 +47,21 @@
 			<main class="inputs">
 					<input id='first-name' class='input100' type='text' name='username' placeholder='Nome completo'>
         <div class="row1">
-					<input id='contato' class='input100' type='text' name='contato' placeholder='Número de contato'>
+					<input id='contato' class='input100' type='text' name='contato' placeholder='DDD + Número de contato'>
 					<input class='input100' type='text' name='cpf' placeholder='CPF'>
+        </div>
+				<div class="row1">
+					<input style="flex:2;" id='endereco' class='input100' type='text' name='endereco' placeholder='Endereço'>
+					<input style="flex:1;" class='input100' type='text' name='numero' placeholder='Número'>
         </div>
         <br>
 					<input id='email' class='input100' type='email' name='email' placeholder='Email'>
 					<input class='input100' type='password' name='pass' placeholder='Digite a Senha'>
+					<label for="is_admin">Administrador: </label>
+					<select <?php echo $hidden; ?> name="is_admin" id="is_admin">
+						<option value="S">Sim</option>
+						<option selected value="N">Não</option>
+					</select>
 			</main>
 			<footer class="footer_login">
 				<button type="submit" class="login_button">

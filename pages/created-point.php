@@ -1,3 +1,21 @@
+<?php
+    session_start();
+    if(isset($_SESSION['ID_USUARIO'])) {
+        $cHtml = "<li><a>Olá ".$_SESSION['NOME']."</a></li>";
+    }
+    else {
+        $cHtml = '<li><a href="contato.php"><b>Entre</b></a></li> <li><a class="item-cadastro" href="contato.php">Cadastre-se</a></li>';
+    }
+
+    if(isset($_GET["erro"])) {
+        $titulo = "Erro na Criação!";
+        $subtitulo = "Parece que você já tem um ponto em aberto, termine o processo atual para poder continuar";
+    }
+    else {
+        $titulo = "Ponto Criado!";
+        $subtitulo = "Seu ponto foi criado com sucesso! Nossos administradores devem entrar em contato logo, muito obrigado!";
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +23,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ponto Criado | SolidaryPoints</title>
+    <link rel="shortcut icon" href="../images/big-logo.png" />
     <link rel="stylesheet" href="../styles/general.css">
     <link rel="stylesheet" href="../styles/header.css">
     <script defer src="../js/header.js"></script>
@@ -210,27 +229,25 @@ p {
                   </div>
                   <ul class="links">
                   <li>
-                      <a href="index.html">Home</a>
+                      <a href="index.php">Home</a>
                   </li>
                   <li>
-                      <a href="quem-somos.html">Sobre</a>
+                      <a href="quem-somos.php">Sobre</a>
                   </li>
                   <li>
                       <a style="border-bottom: 1px solid #F53838; " href="pontos.html">Pontos</a>
                   </li>
                   <li>
-                      <a href="nossos-servicos.html">Perfil</a>
+                      <a href="meu_perfil.php">Perfil</a>
                   </li>
                   
-                  <li><a href="contato.php">Feedback</a></li>
+                  <li><a href="feedback.php">Feedback</a></li>
 
-                  <li><a href="contato.php">Ajuda</a></li>
+                  <li><a href="help.php">Ajuda</a></li>
 
-                  <li><a style="display: flex;" href="../../../hda/helpdesk/pages/login.php">Mapa &nbsp;<img width="25px" src="../images/map-icon.svg"></a></li>
+                  <li><a style="display: flex;" href="full-map.php">Mapa &nbsp;<img width="25px" src="../images/map-icon.svg"></a></li>
                   
-                  <li><a href="contato.php"><b>Entre</b></a></li>
-
-                  <li><a class="item-cadastro" href="contato.php">Cadastre-se</a></li>
+                  <?php echo $cHtml; ?>
                   </ul>
               </div>
               <div class="search-box">
@@ -243,15 +260,15 @@ p {
         </nav>
         <div class="section">
             <div class="info">
-                <p>Ponto Criado!</i></p>
+                <p><?php echo $titulo; ?></i></p>
 				<img width="120px" src="../images/ok.png">
                 <br>
-                <p class="second">Seu ponto foi criado com sucesso! Nossos administradores devem entrar em contato logo, muito obrigado!</p>
+                <p class="second"><?php echo $subtitulo; ?></p>
             </div>
         </div>
     </div>
 	<div class="btn-imp">
-		<a href="index.html">
+		<a href="index.php">
 			<div class="btn_finalizar">
 				<button class="link_finalizar">Voltar</button>
 			</div>

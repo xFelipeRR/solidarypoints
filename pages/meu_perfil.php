@@ -1,3 +1,12 @@
+<?php
+session_start();
+if(isset($_SESSION['ID_USUARIO'])) {
+  $cHtml = "<li><a>Olá ".$_SESSION['NOME']."</a></li>";
+}
+else {
+  $cHtml = '<li><a href="contato.php"><b>Entre</b></a></li> <li><a class="item-cadastro" href="contato.php">Cadastre-se</a></li>';
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -34,28 +43,26 @@
                 <i class='bx bx-x' ></i>
                 </div>
                 <ul class="links">
-                <li>
-                    <a href="index.html">Home</a>
-                </li>
-                <li>
-                    <a href="quem-somos.html">Sobre</a>
-                </li>
-                <li>
-                    <a href="pontos.html">Pontos</a>
-                </li>
-                <li>
-                    <a style="border-bottom: 1px solid #F53838; " href="nossos-servicos.html">Perfil</a>
-                </li>
+                  <li>
+                      <a href="index.php">Home</a>
+                  </li>
+                  <li>
+                      <a href="quem-somos.php">Sobre</a>
+                  </li>
+                  <li>
+                      <a href="pontos.php">Pontos</a>
+                  </li>
+                  <li>
+                      <a style="border-bottom: 1px solid #F53838;" href="meu_perfil.php">Perfil</a>
+                  </li>
+                  
+                  <li><a href="feedback.php">Feedback</a></li>
+
+                  <li><a href="help.php">Ajuda</a></li>
+
+                  <li><a style="display: flex;" href="full-map.php">Mapa &nbsp;<img width="25px" src="../images/map-icon.svg"></a></li>
                 
-                <li><a href="contato.php">Feedback</a></li>
-
-                <li><a href="contato.php">Ajuda</a></li>
-
-                <li><a style="display: flex;" href="../../../hda/helpdesk/pages/login.php">Mapa &nbsp;<img width="25px" src="../images/map-icon.svg"></a></li>
-                
-                <li><a href="contato.php"><b>Entre</b></a></li>
-
-                <li><a class="item-cadastro" href="contato.php">Cadastre-se</a></li>
+                <?php echo $cHtml; ?>
                 </ul>
             </div>
             <div class="search-box">

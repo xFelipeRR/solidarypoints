@@ -1,3 +1,104 @@
+<?php 
+// if((!isset ($_SESSION['login']) == true) and (!isset ($_SESSION['senha']) == true)){
+// 	unset($_SESSION['login']);
+// 	unset($_SESSION['senha']);
+// 	header('location:'.PHPGRID_URL.'/login.php');
+// } 
+
+$admin_menu_icon = "";
+$onlyAdmin = "";
+$cardFeedback = '';
+$xScript = '';
+$conn = mysqli_connect("localhost","root","", "solidarypoints");
+function DataBr($data){
+	if(!empty($data)) {
+		return date("d/m/Y", strtotime($data));
+	}
+	else {
+		return '-';
+	}
+}
+
+// $query = "
+//   SELECT NOME FROM USUARIOS WHERE ID = ".$_SESSION['ID_USUARIO']."
+// ";
+// $result = $conn->query($query);
+// while($row = $result->fetch_array()){
+//   $nome
+// }
+session_start();
+if(isset($_SESSION['ID_USUARIO'])) {
+  $cHtml = "<li><a>Olá ".$_SESSION['NOME']."</a></li>";
+}
+else {
+  $cHtml = '<li><a href="login.html"><b>Entre</b></a></li> <li><a class="item-cadastro" href="cadastro.php">Cadastre-se</a></li>';
+}
+
+if(isset($_SESSION["ADMIN"]) && $_SESSION["ADMIN"] == 'S') {
+  $btnActive = "submit";
+  $styleDisabled = "style='background: whitesmoke;'";
+  $onlyAdmin = "";
+  $admin_menu_icon = '<li class="menu_admin"><a href="menu_admin.php"><img width="30px" src="../images/admin.png" alt="Administradores"></a></li>';
+}
+else {
+  $btnActive = "button";
+  $styleDisabled = "style='background: #b7b7b7; opacity: .8'";
+  $onlyAdmin = "onclick='onlyAdmin()'";
+  $admin_menu_icon = "";
+}
+
+
+$query = "
+  SELECT P.ID,P.DESCRICAO,P.LATLNG,P.STS,P.TP_PONTO,P.CATEGORIAS,USR.NOME,USR.ENDERECO, USR.NUMERO,DT FROM PONTOS P
+  LEFT OUTER JOIN USUARIOS USR ON (USR.ID = P.USUARIO)
+  WHERE P.STS = 'A'
+  AND P.TP_PONTO = 'DI'
+  OR P.TP_PONTO = 'CO'
+";
+
+//echo $query;
+$markers = '';
+$result = $conn->query($query);
+while($row = $result->fetch_array()){
+  if($row["TP_PONTO"] == 'DI') {
+    $markers .= "
+    L.marker([".$row['LATLNG']."], {icon: yellowIcon}).addTo(map)
+    ";
+  }
+  else {
+    $markers .= "
+    L.marker([".$row['LATLNG']."], {icon: blueIcon}).addTo(map)
+    ";
+  }
+}
+
+$query = "
+  SELECT F.*,USR.NOME FROM FEEDBACK F
+  LEFT OUTER JOIN USUARIOS USR ON(USR.ID = F.USUARIO)
+  WHERE F.STS = 'A'
+";
+$result = $conn->query($query);
+while($row = $result->fetch_array()){
+  $cardFeedback .= '
+    <li class="splide__slide">
+    <a class="beneficiado-card">
+      <div class="beneficiado-intern">
+        <div class="img-name-slider">
+          <img src="../images/person-icon.svg">
+          <h4 class="slider-title">'.$row["NOME"].'</h4>
+        </div>
+        
+        <div class="slider-description">
+        '.$row["MENSAGEM"].'
+        </div>
+        <p class="feedback-date">'.DataBr($row["DT"]).'</p>
+      </div>
+    </a>
+  </li>
+  ';
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +106,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu | SolidaryPoints</title>
+    <link rel="shortcut icon" href="../images/big-logo.png" />
     <link rel="stylesheet" href="../styles/general.css">
     <link rel="stylesheet" href="../styles/header.css">
     <script defer src="../js/header.js"></script>
@@ -55,6 +157,22 @@
       height: 450px;
       z-index: 1;
     }
+    .feedback-date {
+      width: 100%;
+      text-align: center;
+      margin-top: 10px;
+    }
+    .menu_admin {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .start-conditions {
+      height: 330px;
+    }
+    .point-img {
+      width: 40px!important;
+    }
 
   </style>
     <div id="wrapper">
@@ -72,24 +190,23 @@
                 <a style="border-bottom: 1px solid #F53838; " href="index.html">Home</a>
               </li>
               <li>
-                <a href="quem-somos.html">Sobre</a>
+                <a href="quem-somos.php">Sobre</a>
               </li>
               <li>
-                <a href="pontos.html">Pontos</a>
+                <a href="pontos.php">Pontos</a>
               </li>
               <li>
-                <a href="nossos-servicos.html">Perfil</a>
+                <a href="meu_perfil.php">Perfil</a>
               </li>
               
-              <li><a href="feedback.html">Feedback</a></li>
+              <li><a href="feedback.php">Feedback</a></li>
 
-              <li><a href="help.html">Ajuda</a></li>
+              <li><a href="help.php">Ajuda</a></li>
 
-              <li><a style="display: flex;" href="../../../hda/helpdesk/pages/login.php">Mapa &nbsp;<img width="25px" src="../images/map-icon.svg"></a></li>
+              <li><a style="display: flex;" href="full-map.php">Mapa &nbsp;<img width="25px" src="../images/map-icon.svg"></a></li>
               
-              <li><a href="contato.php"><b>Entre</b></a></li>
-
-              <li><a class="item-cadastro" href="contato.php">Cadastre-se</a></li>
+              <?php echo $cHtml; ?>
+              <?php echo $admin_menu_icon; ?>
             </ul>
           </div>
           <div class="search-box">
@@ -109,7 +226,7 @@
               <p class="description presentation">
                 Trabalhando juntos, podemos melhorar muito a convivência nas cidades, por meio do desenvolvimento da empatia e o espírito solidário na população
               </p>
-              <a href="#" class="button-form-presentation">Saiba Como</a>
+              <a href="quem-somos.php" class="button-form-presentation">Saiba Como</a>
             </div>
             <div class="img-container-presentation">
               <img src="../images/presentation-img.svg" alt="Apresentação">
@@ -148,39 +265,46 @@
               </div>
               <div class="start-cards-container">
                 <div class="start-card">
-                  <img src="../images/card.png" alt="Card">
+                  <img class="point-img" src="../images/green-adress-point.png" alt="Card">
                   <div class="start-conditions">
                     <h3 class="point-title">Ponto de Doação</h3>
-                    <p style="display: flex; align-items: center;" class="start-item-list"><img src="../images/checkmark.svg" alt="Checkmark">&nbsp;&nbsp; Teste 1 lorem</p>
-                    <p style="display: flex; align-items: center;" class="start-item-list"><img src="../images/checkmark.svg" alt="Checkmark">&nbsp;&nbsp; Teste 2 lorem ipslum</p>
-                    <p style="display: flex; align-items: center;" class="start-item-list"><img src="../images/checkmark.svg" alt="Checkmark">&nbsp;&nbsp; Teste 3 ipslum</p>
-                    <p style="display: flex; align-items: center;" class="start-item-list"><img src="../images/checkmark.svg" alt="Checkmark">&nbsp;&nbsp; Último Teste</p>
+                    <p style="display: flex; align-items: center;" class="start-item-list"><img src="../images/checkmark.svg" alt="Checkmark">&nbsp;&nbsp; Doe Necessidades</p>
+                    <p style="display: flex; align-items: center;" class="start-item-list"><img src="../images/checkmark.svg" alt="Checkmark">&nbsp;&nbsp; Ajude Pessoas</p>
+                    <p style="display: flex; align-items: center;" class="start-item-list"><img src="../images/checkmark.svg" alt="Checkmark">&nbsp;&nbsp; Buscamos em sua casa</p>
+                    <p style="display: flex; align-items: center;" class="start-item-list"><img src="../images/checkmark.svg" alt="Checkmark">&nbsp;&nbsp; Combinamos o horário</p>
                   </div>
-                  <a class="start-card-button" href="#">Selecionar</a>
+                  <form action="choose-point.php" method="POST">
+                    <input type="hidden" name="tp_ponto" value="DO">
+                    <button type="submit" class="start-card-button">Selecionar</button>
+                  </form>
                 </div>
 
-                <div style="background: #b7b7b7; opacity: .8" class="start-card">
-                  <img src="../images/card.png" alt="Card">
+                <div <?php echo $styleDisabled; ?> class="start-card">
+                  <img class="point-img" src="../images/blue-adress-point.png" alt="Card">
                   <div class="start-conditions">
                     <h3 class="point-title">Ponto de Coleta</h3>
-                    <p style="display: flex; align-items: center;" class="start-item-list"><img src="../images/checkmark.svg" alt="Checkmark">&nbsp;&nbsp; Teste 1 lorem</p>
-                    <p style="display: flex; align-items: center;" class="start-item-list"><img src="../images/checkmark.svg" alt="Checkmark">&nbsp;&nbsp; Teste 2 lorem ipslum</p>
-                    <p style="display: flex; align-items: center;" class="start-item-list"><img src="../images/checkmark.svg" alt="Checkmark">&nbsp;&nbsp; Teste 3 ipslum</p>
-                    <p style="display: flex; align-items: center;" class="start-item-list"><img src="../images/checkmark.svg" alt="Checkmark">&nbsp;&nbsp; Último Teste</p>
+                    <img src="../images/checkmark.svg" alt="Checkmark"><p style="display: flex; align-items: flex-start;" class="start-item-list">&nbsp;&nbsp; Pontos de apoio para o recolhimento de doações</p>
+                    <img src="../images/checkmark.svg" alt="Checkmark"><p style="display: flex; align-items: flex-start;" class="start-item-list">&nbsp;&nbsp; Entre em contato e leve sua doação até o ponto</p>
+                    <img src="../images/checkmark.svg" alt="Checkmark"><p style="display: flex; align-items: flex-start;" class="start-item-list">&nbsp;&nbsp; O ponto será a casa de um administrador do sistema</p>
                   </div>
-                  <a class="start-card-button" href="#">Selecionar</a>
+                  <form action="choose-point.php" method="POST">
+                    <input type="hidden" name="tp_ponto" value="CO">
+                    <button <?php echo $onlyAdmin; ?> type="<?php echo $btnActive; ?>" class="start-card-button">Selecionar</button>
+                  </form>
                 </div>
 
-                <div style="background: #b7b7b7; opacity: .8" class="start-card">
-                  <img src="../images/card.png" alt="Card">
+                <div <?php echo $styleDisabled; ?> class="start-card">
+                  <img class="point-img" src="../images/yellow-adress-point.png" alt="Card">
                   <div class="start-conditions">
                     <h3 class="point-title">Ponto de Distribuição</h3>
-                    <p style="display: flex; align-items: center;" class="start-item-list"><img src="../images/checkmark.svg" alt="Checkmark">&nbsp;&nbsp; Teste 1 lorem</p>
-                    <p style="display: flex; align-items: center;" class="start-item-list"><img src="../images/checkmark.svg" alt="Checkmark">&nbsp;&nbsp; Teste 2 lorem ipslum</p>
-                    <p style="display: flex; align-items: center;" class="start-item-list"><img src="../images/checkmark.svg" alt="Checkmark">&nbsp;&nbsp; Teste 3 ipslum</p>
-                    <p style="display: flex; align-items: center;" class="start-item-list"><img src="../images/checkmark.svg" alt="Checkmark">&nbsp;&nbsp; Último Teste</p>
+                    <img src="../images/checkmark.svg" alt="Checkmark"><p style="display: flex; align-items: flex-start;" class="start-item-list">&nbsp;&nbsp; Eventos de distribuição de necessidades arrecadadas</p>
+                    <img src="../images/checkmark.svg" alt="Checkmark"><p style="display: flex; align-items: flex-start;" class="start-item-list">&nbsp;&nbsp; Terão localização em pontos conhecidos na cidade</p>
+                    <img src="../images/checkmark.svg" alt="Checkmark"><p style="display: flex; align-items: flex-start;" class="start-item-list">&nbsp;&nbsp; Todos que necessitarem de alguma ajuda podem comparecer</p>
                   </div>
-                  <a class="start-card-button" href="#">Selecionar</a>
+                  <form action="choose-point.php" method="POST">
+                    <input type="hidden" name="tp_ponto" value="DI">
+                    <button <?php echo $onlyAdmin; ?> type="<?php echo $btnActive; ?>" class="start-card-button">Selecionar</button>
+                  </form>
                 </div>
               </div>
             </div>
@@ -211,66 +335,8 @@
             
               <div id="card-slider" class="splide">
                 <div class="splide__track">
-                    <ul class="splide__list">
-                      <li class="splide__slide">
-                        <a class="beneficiado-card" href="nossos-servicos.html#implantacao">
-                          <div class="beneficiado-intern">
-                            <div class="img-name-slider">
-                              <img src="../images/person-icon.svg">
-                              <h4 class="slider-title">Viezh Robert</h4>
-                            </div>
-                            
-                            <div class="slider-description">
-                              “Wow... I am very happy to use this VPN, it turned out to be more than my expectations and so far there have been no problems. LaslesVPN always the best”.
-                            </div>
-                          </div>
-                        </a>
-                      </li>
-
-                    <li class="splide__slide">
-                      <a class="beneficiado-card" href="nossos-servicos.html#implantacao">
-                        <div class="beneficiado-intern">
-                          <div class="img-name-slider">
-                            <img src="../images/person-icon.svg">
-                            <h4 class="slider-title">Viezh Robert</h4>
-                          </div>
-                          
-                          <div class="slider-description">
-                            “Wow... I am very happy to use this VPN, it turned out to be more than my expectations and so far there have been no problems. LaslesVPN always the best”.
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-
-                    <li class="splide__slide">
-                      <a class="beneficiado-card" href="nossos-servicos.html#implantacao">
-                        <div class="beneficiado-intern">
-                          <div class="img-name-slider">
-                            <img src="../images/person-icon.svg">
-                            <h4 class="slider-title">Viezh Robert</h4>
-                          </div>
-                          
-                          <div class="slider-description">
-                            “Wow... I am very happy to use this VPN, it turned out to be more than my expectations and so far there have been no problems. LaslesVPN always the best”.
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-
-                    <li class="splide__slide">
-                      <a class="beneficiado-card" href="nossos-servicos.html#implantacao">
-                        <div class="beneficiado-intern">
-                          <div class="img-name-slider">
-                            <img src="../images/person-icon.svg">
-                            <h4 class="slider-title">Viezh Robert</h4>
-                          </div>
-                          
-                          <div class="slider-description">
-                            “Wow... I am very happy to use this VPN, it turned out to be more than my expectations and so far there have been no problems. LaslesVPN always the best”.
-                          </div>
-                        </div>
-                      </a>
-                    </li>
+                  <ul class="splide__list">
+                    <?php echo $cardFeedback; ?>
                   </ul>
                 </div>
               </div>
@@ -279,12 +345,12 @@
           </div>
           <div class="footer-basic">
             <footer>
-                <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
+                <div class="social"><a target="_blank" href="http://instagram.com/solidarypoints"><i class="icon ion-social-instagram"></i></a></div>
                 <ul class="list-inline">
-                    <li class="list-inline-item"><a href="#">Home</a></li>
-                    <li class="list-inline-item"><a href="#">Sobre</a></li>
-                    <li class="list-inline-item"><a href="#">Feedback</a></li>
-                    <li class="list-inline-item"><a href="#">Ajuda</a></li>
+                    <li class="list-inline-item"><a href="index.php">Home</a></li>
+                    <li class="list-inline-item"><a href="quem-somos.php">Sobre</a></li>
+                    <li class="list-inline-item"><a href="feedback.php">Feedback</a></li>
+                    <li class="list-inline-item"><a href="help.php">Ajuda</a></li>
                 </ul>
                 <p class="copyright">SolidaryPoints © 2021</p>
             </footer>
@@ -294,6 +360,11 @@
       </div>
     </div>
 
+    <script>
+      function onlyAdmin() {
+        alert('Esse ponto só pode ser aberto por um administrador')
+      }
+    </script>
     <script>
       
       let perPageValue = 0;
@@ -338,9 +409,27 @@
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         }).addTo(map);
 
-        function onMapClick(e) {
-            alert("You clicked the map at " + e.latlng);
-        }
+        var blueIcon = L.icon({
+          iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+          shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+
+
+          shadowSize:   [50, 64], // size of the shadow
+          iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+          shadowAnchor: [4, 62],  // the same for the shadow
+          popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+    });
+        var yellowIcon = L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-yellow.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+
+
+            shadowSize:   [50, 64], // size of the shadow
+            iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+            shadowAnchor: [4, 62],  // the same for the shadow
+            popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+       });
+       <?php echo $markers; ?>
         map.on('click', onMapClick);
     </script>
 </body>

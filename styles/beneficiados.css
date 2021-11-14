@@ -7,7 +7,7 @@
     /* height: 200px; */
     background: linear-gradient(#F53838, blue);
     color: #d2d1d1;
-    padding: 20px;
+    padding: 20px 20px 0px 20px;
     border-radius: 20px;
     text-decoration: none;
     margin: 0px 10px;
@@ -30,10 +30,14 @@
     justify-content: center;
     flex-direction: column;
 }
+.img-name-slider h4 {
+    color: #e7e7e7;
+}
 .slider-description {
     width: 100%;
     text-align: justify;
     text-decoration: none;
+    color: white;
 }
 
 @media (min-width: 100px) and (max-width: 1000px) {

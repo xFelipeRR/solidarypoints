@@ -1,14 +1,26 @@
+<?php
+session_start();
+if(isset($_SESSION['ID_USUARIO'])) {
+  $cHtml = "<li><a>Olá ".$_SESSION['NOME']."</a></li>";
+}
+else {
+  $cHtml = '<li><a href="login.html"><b>Entre</b></a></li> <li><a class="item-cadastro" href="cadastro.php">Cadastre-se</a></li>';
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pontos | SolidaryPoints</title>
+    <title>Ajuda | SolidaryPoints</title>
+    <link rel="shortcut icon" href="../images/big-logo.png" />
     <link rel="stylesheet" href="../styles/general.css">
     <link rel="stylesheet" href="../styles/header.css">
+    <link rel="stylesheet" href="../styles/help.css">
     <script defer src="../js/header.js"></script>
     <link rel="stylesheet" href="../styles/points.css">
+    <link rel="stylesheet" href="../styles/choose-point.css">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -30,6 +42,7 @@
         position: relative;
         top: 100px;
     }
+
 </style>
 
   <div id="wrapper">
@@ -46,27 +59,25 @@
                   </div>
                   <ul class="links">
                   <li>
-                      <a href="index.html">Home</a>
+                      <a href="index.php">Home</a>
                   </li>
                   <li>
-                      <a href="quem-somos.html">Sobre</a>
+                      <a href="quem-somos.php">Sobre</a>
                   </li>
                   <li>
-                      <a style="border-bottom: 1px solid #F53838; " href="pontos.html">Pontos</a>
+                      <a href="pontos.php">Pontos</a>
                   </li>
                   <li>
-                      <a href="nossos-servicos.html">Perfil</a>
+                      <a href="meu_perfil.php">Perfil</a>
                   </li>
                   
-                  <li><a href="contato.php">Feedback</a></li>
+                  <li><a href="feedback.php">Feedback</a></li>
 
-                  <li><a href="contato.php">Ajuda</a></li>
+                  <li><a style="border-bottom: 1px solid #F53838;" href="help.php">Ajuda</a></li>
 
-                  <li><a style="display: flex;" href="../../../hda/helpdesk/pages/login.php">Mapa &nbsp;<img width="25px" src="../images/map-icon.svg"></a></li>
-                  
-                  <li><a href="contato.php"><b>Entre</b></a></li>
+                  <li><a style="display: flex;" href="full-map.php">Mapa &nbsp;<img width="25px" src="../images/map-icon.svg"></a></li>
 
-                  <li><a class="item-cadastro" href="contato.php">Cadastre-se</a></li>
+                  <?php echo $cHtml; ?>
                   </ul>
               </div>
               <div class="search-box">
@@ -81,39 +92,22 @@
 
       <div class="align-div">
         <div class="cards-description-container">
-          <h2 style="margin-bottom: 0px!important;" class="title cards">Qual tipo de ponto você quer criar?</h2>
+          <h2 style="margin-bottom: 0px!important;" class="title cards">Fale conosco e nos-ajudaremos</h2>
           <p class="description cards">
-            Escolha o tipo de ponto que você quer criar no mapa da sua cidade
+            Aqui você pode nos deixar uma mensagem, seja algum problema ocorrido ou algo que gostaria de incrementar no site e assim que possível, lhe-enviaremos uma resposta
           </p>
-        </div>
-        <div class="card-points-page">
-          <form action="choose-point.php" method="POST">
-            <button type="submit" style="background: white;" class="card-points-card">
-              <input type="hidden" name="point" value="doacao">
-              <img src="../images/card.png" alt="">
-              <p class="card-point-name">Ponto de Doação</p>
-            </button>
+          <form action="../script.php" method="POST">
+            <input hidden type="text" name="visao" value="create_help">
+            <div class="help-form">
+              <p class="ask-point">Sinta-se a vontade para nos dizer o que precisa:</p>
+              <textarea placeholder="Digite sua mensagem" name="helpMsg" id="helpMsg" cols="30" rows="10"></textarea>
+              <button class="send-help-btn">Inserir</button>
+            </div>
           </form>
-        
-          <form action="choose-point.php" method="POST">
-            <button type="button" style="background: #b7b7b7; opacity: .8" class="card-points-card">
-              <input type="hidden" name="point" value="coleta">
-              <img src="../images/card.png" alt="">
-              <p class="card-point-name">Ponto de Coleta</p>
-            </button>
-          </form>
-        
-          <form action="choose-point.php" method="POST">
-            <button type="button" style="background: #b7b7b7; opacity: .8" class="card-points-card">
-              <input type="hidden" name="point" value="distribuicao">
-              <img src="../images/card.png" alt="">
-              <p class="card-point-name">Ponto de Distribuição</p>
-            </button>
-          </form>
-        
-          </div>
         </div>
       </div>
+
+
 
     </div>
   </div>

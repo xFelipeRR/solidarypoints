@@ -1,13 +1,22 @@
+<?php
+session_start();
+if(isset($_SESSION['ID_USUARIO'])) {
+  $cHtml = "<li><a>Olá ".$_SESSION['NOME']."</a></li>";
+}
+else {
+  $cHtml = '<li><a href="login.html"><b>Entre</b></a></li> <li><a class="item-cadastro" href="cadastro.php">Cadastre-se</a></li>';
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feedback | SolidaryPoints</title>
+    <title>Quem Somos | SolidaryPoints</title>
+    <link rel="shortcut icon" href="../images/big-logo.png" />
     <link rel="stylesheet" href="../styles/general.css">
     <link rel="stylesheet" href="../styles/header.css">
-    <link rel="stylesheet" href="../styles/help.css">
     <script defer src="../js/header.js"></script>
     <link rel="stylesheet" href="../styles/points.css">
     <link rel="stylesheet" href="../styles/choose-point.css">
@@ -32,6 +41,10 @@
         position: relative;
         top: 100px;
     }
+    .subtitle {
+      font-size: 25px;
+      margin-top: 15px;
+    }
 
 </style>
 
@@ -49,27 +62,25 @@
                   </div>
                   <ul class="links">
                   <li>
-                      <a href="index.html">Home</a>
+                      <a href="index.php">Home</a>
                   </li>
                   <li>
-                      <a href="quem-somos.html">Sobre</a>
+                      <a style="border-bottom: 1px solid #F53838; " href="quem-somos.php">Sobre</a>
                   </li>
                   <li>
-                      <a href="pontos.html">Pontos</a>
+                      <a href="pontos.php">Pontos</a>
                   </li>
                   <li>
-                      <a href="nossos-servicos.html">Perfil</a>
+                      <a href="meu_perfil.php">Perfil</a>
                   </li>
                   
-                  <li><a style="border-bottom: 1px solid #F53838; " href="feedback.html">Feedback</a></li>
+                  <li><a href="feedback.php">Feedback</a></li>
 
-                  <li><a href="help.html">Ajuda</a></li>
+                  <li><a href="help.php">Ajuda</a></li>
 
-                  <li><a style="display: flex;" href="../../../hda/helpdesk/pages/login.php">Mapa &nbsp;<img width="25px" src="../images/map-icon.svg"></a></li>
+                  <li><a style="display: flex;" href="full-map.php">Mapa &nbsp;<img width="25px" src="../images/map-icon.svg"></a></li>
                   
-                  <li><a href="contato.php"><b>Entre</b></a></li>
-
-                  <li><a class="item-cadastro" href="contato.php">Cadastre-se</a></li>
+                  <?php echo $cHtml; ?>
                   </ul>
               </div>
               <div class="search-box">
@@ -84,15 +95,28 @@
 
       <div class="align-div">
         <div class="cards-description-container">
-          <h2 style="margin-bottom: 0px!important;" class="title cards">Envie seu Feedback</h2>
+          <h2 style="margin-bottom: 0px!important;" class="title cards">Sobre Nós</h2>
+        </div>
+
+        <div class="cards-description-container">
+          <h2 style="margin-bottom: 0px!important;" class="title cards subtitle">Quem Somos?</h2>
           <p class="description cards">
-            Nos mande o que você achou do projeto e como podemos melhorar, adoraremos ler sua opinião!
+            Somos alunos da escola de educação profissional Edson Queiroz, motivados pelo projeto social do curso de informática a desenvolver um sistema que ajude o bem estar social, dito isso, este site se tornou a realização do mesmo.
           </p>
-          <div class="help-form">
-            <p class="ask-point">Sinta-se a vontade para expor suas opiniões:</p>
-            <textarea placeholder="Digite sua mensagem" name="helpMsg" id="helpMsg" cols="30" rows="10"></textarea>
-            <button class="send-help-btn">Inserir</button>
-          </div>
+        </div>
+
+        <div class="cards-description-container">
+          <h2 style="margin-bottom: 0px!important;" class="title cards subtitle">Qual o Nosso Objetivo?</h2>
+          <p class="description cards">
+            Com esta plataforma, se torna possível o mapeamento de doações e coleta, por consequência tornando mais simples a distribuição das necessidades coletadas. Nosso principal objetivo é fazer com que por meio da estimulação e simplificação do desenvolvimento da solidariedade na cidade, se faça possível a beneficiação a todos os que precisam de alguma ajuda com necessidades básicas.
+          </p>
+        </div>
+
+        <div class="cards-description-container">
+          <h2 style="margin-bottom: 0px!important;" class="title cards subtitle">Sobre o Site</h2>
+          <p class="description cards">
+            Por meio deste sistema, é possível cadastrar pontos de doação, para que nós, administradores, possamos coleta-los em sua casa. Para que assim, juntemos as doações e possamos organizar eventos de distribuição para entregar as mesmas a quem precisa.
+          </p>
         </div>
       </div>
 
