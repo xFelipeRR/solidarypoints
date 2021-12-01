@@ -57,7 +57,7 @@
         <br>
 					<input id='email' class='input100' type='email' name='email' placeholder='Email'>
 					<input class='input100' type='password' name='pass' placeholder='Digite a Senha'>
-					<label for="is_admin">Administrador: </label>
+					<label <?php echo $hidden; ?> for="is_admin">Administrador: </label>
 					<select <?php echo $hidden; ?> name="is_admin" id="is_admin">
 						<option value="S">Sim</option>
 						<option selected value="N">Não</option>
@@ -65,7 +65,7 @@
 			</main>
 			<footer class="footer_login">
 				<button type="submit" class="login_button">
-					Login
+					Cadastrar
 				</button>
 			</footer>
 		</form>

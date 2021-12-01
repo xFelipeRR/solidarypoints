@@ -115,7 +115,7 @@ else {
         <div class="cards-description-container">
           <h2 style="margin-bottom: 0px!important;" class="title cards subtitle">Sobre o Site</h2>
           <p class="description cards">
-            Por meio deste sistema, é possível cadastrar pontos de doação, para que nós, administradores, possamos coleta-los em sua casa. Para que assim, juntemos as doações e possamos organizar eventos de distribuição para entregar as mesmas a quem precisa.
+            Por meio deste sistema, é possível cadastrar pontos de doação, para que nós, administradores, possamos coletá-los em sua casa. Para que assim, juntemos as doações e possamos organizar eventos de distribuição para entregar as mesmas a quem precisa.
           </p>
         </div>
       </div>
