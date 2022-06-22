@@ -1,2 +1,2 @@
 # SolidaryPoints
- SolidaryPoints é um sistema web que permite a criação de pontos no mapa de uma cidade para mapear pontos de necessidade, doação e distribuição, para assim, incentivar a solidariedade e ajudar a população da cidade
+SolidaryPoints is a web system that allows the creation of points on the map of a city to map points of need, donation and distribution, in order to encourage solidarity and help the population of the city
